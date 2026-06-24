@@ -7,12 +7,8 @@ import {
 } from "@/domains/catalog/entity/product";
 import {getProductBySlug} from "@/domains/catalog/repository/productRepository";
 
-export default async function ProductPage({
-                                              params,
-                                          }: {
-    params: Promise<{ slug: string }>;
-}) {
-    const {slug} = await params;
+export default async function ProductPage(props: PageProps<"/products/[slug]">) {
+    const { slug } = await props.params;
     const product = getProductBySlug(slug);
 
     if (!product) {

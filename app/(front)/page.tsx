@@ -1,4 +1,4 @@
-import {ProductCard} from "./components/ProductCard";
+import {ProductCard} from "../components/ProductCard";
 import {getProducts} from "@/domains/catalog/repository/productRepository";
 
 export default function Home() {
