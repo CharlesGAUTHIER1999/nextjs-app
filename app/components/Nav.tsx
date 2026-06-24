@@ -21,7 +21,7 @@ export function Nav({ cartSummary }: { cartSummary?: ReactNode }) {
                             </Link>
                         </li>
                         <li>
-                            <Link href="/loading-demo" className="hover:underline">
+                            <Link href="/demo" className="hover:underline">
                                 Démo loading
                             </Link>
                         </li>
