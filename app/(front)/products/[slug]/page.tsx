@@ -2,6 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import {
     formatPrice,
+    formatSpecLabel,
+    formatSpecValue,
     formatStockLabel,
     isInStock,
 } from "@/domains/catalog/entity/product";
@@ -19,6 +21,13 @@ export default async function ProductPage(props: PageProps<"/products/[slug]">) 
             </div>
         );
     }
+
+    // Onglet actif piloté par l'URL (?tab=specs), « description » par défaut.
+    const { tab } = await props.searchParams;
+    const activeTab = tab === "specs" ? "specs" : "description";
+    const specs = Object.entries(product.specs).filter(
+        ([, value]) => value !== undefined
+    );
 
     const inStock = isInStock(product);
 
@@ -71,9 +80,67 @@ export default async function ProductPage(props: PageProps<"/products/[slug]">) 
                     <h1 className="mt-2 text-3xl font-bold text-zinc-900 dark:text-zinc-100 sm:text-4xl">
                         {product.name}
                     </h1>
-                    <p className="mt-4 text-lg text-zinc-600 dark:text-zinc-400">
-                        {product.description}
-                    </p>
+                    <div className="mt-6">
+                        <div
+                            role="tablist"
+                            className="flex gap-1 border-b border-zinc-200 dark:border-zinc-800"
+                        >
+                            <Link
+                                href={`/products/${product.slug}?tab=description`}
+                                scroll={false}
+                                role="tab"
+                                aria-selected={activeTab === "description"}
+                                className={
+                                    activeTab === "description"
+                                        ? "-mb-px border-b-2 border-zinc-900 px-4 py-2 text-sm font-medium text-zinc-900 dark:border-zinc-100 dark:text-zinc-100"
+                                        : "px-4 py-2 text-sm font-medium text-zinc-500 hover:text-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-200"
+                                }
+                            >
+                                Description
+                            </Link>
+                            <Link
+                                href={`/products/${product.slug}?tab=specs`}
+                                scroll={false}
+                                role="tab"
+                                aria-selected={activeTab === "specs"}
+                                className={
+                                    activeTab === "specs"
+                                        ? "-mb-px border-b-2 border-zinc-900 px-4 py-2 text-sm font-medium text-zinc-900 dark:border-zinc-100 dark:text-zinc-100"
+                                        : "px-4 py-2 text-sm font-medium text-zinc-500 hover:text-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-200"
+                                }
+                            >
+                                Spécifications
+                            </Link>
+                        </div>
+
+                        <div role="tabpanel" className="pt-4">
+                            {activeTab === "description" ? (
+                                <p className="text-lg text-zinc-600 dark:text-zinc-400">
+                                    {product.description}
+                                </p>
+                            ) : specs.length > 0 ? (
+                                <dl className="divide-y divide-zinc-100 dark:divide-zinc-800">
+                                    {specs.map(([key, value]) => (
+                                        <div
+                                            key={key}
+                                            className="flex justify-between gap-4 py-2 text-sm"
+                                        >
+                                            <dt className="text-zinc-500 dark:text-zinc-400">
+                                                {formatSpecLabel(key)}
+                                            </dt>
+                                            <dd className="font-medium text-zinc-900 dark:text-zinc-100">
+                                                {formatSpecValue(value)}
+                                            </dd>
+                                        </div>
+                                    ))}
+                                </dl>
+                            ) : (
+                                <p className="text-sm text-zinc-500 dark:text-zinc-400">
+                                    Aucune spécification disponible.
+                                </p>
+                            )}
+                        </div>
+                    </div>
 
                     <div className="mt-6 flex items-baseline gap-3">
             <span className="text-3xl font-bold text-zinc-900 dark:text-zinc-100">
