@@ -21,6 +21,11 @@ export function Nav({ cartSummary }: { cartSummary?: ReactNode }) {
                             </Link>
                         </li>
                         <li>
+                            <Link href="/loading-demo" className="hover:underline">
+                                Démo loading
+                            </Link>
+                        </li>
+                        <li>
                             <Link
                                 href="/admin"
                                 className="text-zinc-500 hover:text-zinc-900 hover:underline dark:text-zinc-500 dark:hover:text-zinc-100"
