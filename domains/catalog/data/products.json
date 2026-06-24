@@ -1,0 +1,249 @@
+[
+  {
+    "id": "prod-1",
+    "name": "Ferrari 51",
+    "slug": "ferrari-51",
+    "description": "Créée par Ferrari Design en collaboration avec AF CORSE, la nouvelle livrée de la Ferrari 51 (Hypercar) incarne la vision moderne du sport automobile selon FERRARI : une alliance de passion, d’excellence technologique et de performance.",
+    "price": 25000000.00,
+    "currency": "EUR",
+    "stock": 2,
+    "sku": "FER-51-001",
+    "category": "Hypercar",
+    "brand": "Ferrari",
+    "images": {
+      "main": "https://images.unsplash.com/photo-1697209553075-45e5fb9cbeea?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "gallery": [
+        "https://images.unsplash.com/photo-1697209553075-45e5fb9cbeea?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      ]
+    },
+    "specs": {
+      "weight": "1500kg",
+      "gps": true
+    }
+  },
+  {
+    "id": "prod-2",
+    "name": "Lamborghini Aventador",
+    "slug": "lamborghini-aventador",
+    "description": "Voiture de sport emblématique propulsée par un V12 atmosphérique de 6,5 L. Lignes anguleuses, portes en élytre et transmission intégrale pour des performances extrêmes sur route comme sur circuit.",
+    "price": 450000.00,
+    "currency": "EUR",
+    "stock": 3,
+    "sku": "LAM-AVE-002",
+    "category": "Supercar",
+    "brand": "Lamborghini",
+    "images": {
+      "main": "https://images.unsplash.com/photo-1630312465536-5c6b1f76dc3f?q=80&w=627&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "gallery": [
+        "https://images.unsplash.com/photo-1630312465536-5c6b1f76dc3f?q=80&w=627&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      ]
+    },
+    "specs": {
+      "engine": "V12 6.5L",
+      "power": "770 ch",
+      "topSpeed": "350 km/h",
+      "weight": "1575kg",
+      "gps": true
+    }
+  },
+  {
+    "id": "prod-3",
+    "name": "Porsche 911 Carrera",
+    "slug": "porsche-911-carrera",
+    "description": "L'icône intemporelle de Stuttgart. Flat-6 turbo, châssis équilibré et confort quotidien : la 911 Carrera reste la référence des sportives polyvalentes.",
+    "price": 128000.00,
+    "currency": "EUR",
+    "stock": 8,
+    "sku": "POR-911-003",
+    "category": "Sportive",
+    "brand": "Porsche",
+    "images": {
+      "main": "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800",
+      "gallery": [
+        "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800"
+      ]
+    },
+    "specs": {
+      "engine": "Flat-6 3.0L Turbo",
+      "power": "385 ch",
+      "topSpeed": "293 km/h",
+      "weight": "1505kg",
+      "gps": true
+    }
+  },
+  {
+    "id": "prod-4",
+    "name": "McLaren 720S",
+    "slug": "mclaren-720s",
+    "description": "Supercar britannique en fibre de carbone Monocage II. V8 biturbo de 720 ch, aérodynamique active et rapport poids/puissance redoutable.",
+    "price": 310000.00,
+    "currency": "EUR",
+    "stock": 4,
+    "sku": "MCL-720-004",
+    "category": "Supercar",
+    "brand": "McLaren",
+    "images": {
+      "main": "https://images.unsplash.com/photo-1621615578530-cbf3c443165f?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "gallery": [
+        "https://images.unsplash.com/photo-1621615578530-cbf3c443165f?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      ]
+    },
+    "specs": {
+      "engine": "V8 4.0L Biturbo",
+      "power": "720 ch",
+      "topSpeed": "341 km/h",
+      "weight": "1419kg",
+      "gps": true
+    }
+  },
+  {
+    "id": "prod-5",
+    "name": "Tesla Model S Plaid",
+    "slug": "tesla-model-s-plaid",
+    "description": "Berline 100% électrique tri-moteurs. 0 à 100 km/h en moins de 2,1 s, plus de 600 km d'autonomie et un intérieur minimaliste centré sur l'écran.",
+    "price": 114990.00,
+    "currency": "EUR",
+    "stock": 12,
+    "sku": "TES-MSP-005",
+    "category": "Électrique",
+    "brand": "Tesla",
+    "images": {
+      "main": "https://images.unsplash.com/photo-1560958089-b8a1929cea89?w=800",
+      "gallery": [
+        "https://images.unsplash.com/photo-1560958089-b8a1929cea89?w=800"
+      ]
+    },
+    "specs": {
+      "motor": "Tri-moteurs électrique",
+      "power": "1020 ch",
+      "range": "637 km",
+      "topSpeed": "322 km/h",
+      "gps": true
+    }
+  },
+  {
+    "id": "prod-6",
+    "name": "Bugatti Chiron",
+    "slug": "bugatti-chiron",
+    "description": "Hypercar d'exception au W16 quadriturbo de 8,0 L. Plus de 1500 ch et une vitesse de pointe limitée électroniquement à 420 km/h. L'excellence française sans compromis.",
+    "price": 3000000.00,
+    "currency": "EUR",
+    "stock": 1,
+    "sku": "BUG-CHI-006",
+    "category": "Hypercar",
+    "brand": "Bugatti",
+    "images": {
+      "main": "https://images.unsplash.com/photo-1627454820516-dc767bcb4d3e?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "gallery": [
+        "https://images.unsplash.com/photo-1627454820516-dc767bcb4d3e?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      ]
+    },
+    "specs": {
+      "engine": "W16 8.0L Quadriturbo",
+      "power": "1500 ch",
+      "topSpeed": "420 km/h",
+      "weight": "1995kg",
+      "gps": true
+    }
+  },
+  {
+    "id": "prod-7",
+    "name": "Aston Martin DB11",
+    "slug": "aston-martin-db11",
+    "description": "Grand tourisme britannique au design élégant. V8 ou V12, châssis raffiné et habitacle cousu main : le luxe à l'anglaise pour avaler les kilomètres.",
+    "price": 205000.00,
+    "currency": "EUR",
+    "stock": 5,
+    "sku": "AST-DB11-007",
+    "category": "Grand Tourisme",
+    "brand": "Aston Martin",
+    "images": {
+      "main": "https://images.unsplash.com/photo-1761668573021-bee02c23b9a8?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "gallery": [
+        "https://images.unsplash.com/photo-1761668573021-bee02c23b9a8?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      ]
+    },
+    "specs": {
+      "engine": "V12 5.2L Biturbo",
+      "power": "639 ch",
+      "topSpeed": "334 km/h",
+      "weight": "1875kg",
+      "gps": true
+    }
+  },
+  {
+    "id": "prod-8",
+    "name": "Ford Mustang GT",
+    "slug": "ford-mustang-gt",
+    "description": "L'icône américaine du muscle car. V8 5.0 L Coyote au son envoûtant, propulsion et style rétro-moderne. Le plaisir de conduire à l'état brut.",
+    "price": 58000.00,
+    "currency": "EUR",
+    "stock": 15,
+    "sku": "FOR-MUS-008",
+    "category": "Muscle Car",
+    "brand": "Ford",
+    "images": {
+      "main": "https://images.unsplash.com/photo-1584345604476-8ec5e12e42dd?w=800",
+      "gallery": [
+        "https://images.unsplash.com/photo-1584345604476-8ec5e12e42dd?w=800"
+      ]
+    },
+    "specs": {
+      "engine": "V8 5.0L",
+      "power": "450 ch",
+      "topSpeed": "250 km/h",
+      "weight": "1700kg",
+      "gps": true
+    }
+  },
+  {
+    "id": "prod-9",
+    "name": "Mercedes-AMG GT",
+    "slug": "mercedes-amg-gt",
+    "description": "Sportive allemande au long capot et au V8 biturbo logé en position avant centrale. Châssis affûté par AMG pour une expérience de conduite intense.",
+    "price": 175000.00,
+    "currency": "EUR",
+    "stock": 6,
+    "sku": "MER-AMG-009",
+    "category": "Sportive",
+    "brand": "Mercedes-AMG",
+    "images": {
+      "main": "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "gallery": [
+        "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      ]
+    },
+    "specs": {
+      "engine": "V8 4.0L Biturbo",
+      "power": "585 ch",
+      "topSpeed": "318 km/h",
+      "weight": "1645kg",
+      "gps": true
+    }
+  },
+  {
+    "id": "prod-10",
+    "name": "Audi R8 V10",
+    "slug": "audi-r8-v10",
+    "description": "Supercar quotidienne dérivée du sport automobile. V10 atmosphérique de 5,2 L, transmission intégrale quattro et finition irréprochable. Performance accessible et fiable.",
+    "price": 195000.00,
+    "currency": "EUR",
+    "stock": 7,
+    "sku": "AUD-R8-010",
+    "category": "Supercar",
+    "brand": "Audi",
+    "images": {
+      "main": "https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "gallery": [
+        "https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      ]
+    },
+    "specs": {
+      "engine": "V10 5.2L",
+      "power": "570 ch",
+      "topSpeed": "330 km/h",
+      "weight": "1595kg",
+      "gps": true
+    }
+  }
+]
