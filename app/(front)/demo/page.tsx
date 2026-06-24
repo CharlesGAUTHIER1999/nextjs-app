@@ -1,37 +1,33 @@
-import { Suspense } from "react";
+import { CrashButton } from "./CrashButton";
 
-// Rendu à la demande pour que le streaming se rejoue à chaque visite.
+// Rendu à la demande : le fallback loading.tsx se déclenche à chaque visite.
 export const dynamic = "force-dynamic";
 
-async function SlowData() {
-    // Latence simulée : ce composant « suspend » pendant son chargement.
+async function getSlowData() {
+    // Latence simulée : la page « suspend » pendant 2s → loading.tsx s'affiche.
     await new Promise((resolve) => setTimeout(resolve, 2000));
-    return (
-        <p className="mt-6 text-lg text-zinc-600 dark:text-zinc-400">
-            Données chargées après 2 secondes.
-        </p>
-    );
+    return "Données chargées après 2 secondes.";
 }
 
-export default function DemoPage() {
+export default async function DemoPage() {
+    const message = await getSlowData();
+
     return (
         <div className="mx-auto max-w-2xl px-4 py-16 text-center sm:px-6 lg:px-8">
             <h1 className="font-display text-4xl font-bold text-zinc-900 dark:text-zinc-100">
-                Démo loading
+                Démo loading & error
             </h1>
-            <p className="mt-4 text-sm text-zinc-500 dark:text-zinc-400">
-                Le titre s’affiche immédiatement ; seul le bloc ci-dessous est suspendu.
-            </p>
+            <p className="mt-6 text-lg text-zinc-600 dark:text-zinc-400">{message}</p>
 
-            <Suspense
-                fallback={
-                    <p className="mt-6 animate-pulse text-lg text-zinc-500">
-                        Chargement…
-                    </p>
-                }
-            >
-                <SlowData />
-            </Suspense>
+            <div className="mt-10">
+                <p className="text-sm text-zinc-500 dark:text-zinc-400">
+                    Clique pour déclencher une erreur et voir le rendu de{" "}
+                    <code>error.tsx</code> :
+                </p>
+                <div className="mt-3">
+                    <CrashButton />
+                </div>
+            </div>
         </div>
     );
 }
