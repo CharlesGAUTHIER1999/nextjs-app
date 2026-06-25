@@ -87,6 +87,7 @@ function mapNodeToSponsoredProduct(
 export async function fetchMockShopProducts(
     limit: number = 6,
 ): Promise<SponsoredProduct[]> {
+    const start = performance.now();
     const res = await fetch(MOCK_SHOP_GRAPHQL, {
         method: "POST",
         headers: {"Content-Type": "application/json"},
@@ -94,7 +95,9 @@ export async function fetchMockShopProducts(
             query: PRODUCTS_QUERY,
             variables: {first: limit},
         }),
+        next: {revalidate: 3600},
     });
+    console.log(`[mockShop] fetch products ${(performance.now() - start).toFixed(0)}ms`,);
 
     if (!res.ok) {
         throw new Error(`Mock.shop API error: ${res.status}`);
@@ -117,6 +120,7 @@ type ProductByHandleResponse = {
 export async function fetchMockShopProductByHandle(
     handle: string,
 ): Promise<SponsoredProduct | null> {
+    const start = performance.now();
     const res = await fetch(MOCK_SHOP_GRAPHQL, {
         method: "POST",
         headers: {"Content-Type": "application/json"},
@@ -124,7 +128,11 @@ export async function fetchMockShopProductByHandle(
             query: PRODUCT_BY_HANDLE_QUERY,
             variables: {handle},
         }),
+        next: {revalidate: 3600}
     });
+    console.log(
+        `[mockShop] fetch product by handle ${(performance.now() - start).toFixed(0)}ms`,
+    );
 
     if (!res.ok) return null;
     const json = (await res.json()) as ProductByHandleResponse;
