@@ -38,3 +38,15 @@ export async function getProductBySlug(
     const row = await prisma.product.findUnique({ where: { slug } });
     return row ? toEntity(row) : undefined;
 }
+
+// Relation directionnelle : on renvoie les produits que CE produit recommande
+// (le côté `similar`, curé au seed). Pas de fusion avec `similarOf`, sinon le
+// petit catalogue se cross-lie quasi entièrement.
+export async function getSimilarProducts(slug: string): Promise<Product[]> {
+    const row = await prisma.product.findUnique({
+        where: { slug },
+        include: { similar: { orderBy: { createdAt: "asc" } } },
+    });
+    if (!row) return [];
+    return row.similar.map(toEntity);
+}

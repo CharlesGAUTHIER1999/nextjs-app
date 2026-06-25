@@ -23,4 +23,34 @@ model Product {
   specs       Json     // Record<string, string | number | boolean>
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+
+  // Relation self many-to-many : produits similaires.
+  // Prisma crée une table de jointure implicite `_SimilarProducts`.
+  // La relation est stockée dans un seul sens ; on lit les deux côtés
+  // (`similar` + `similarOf`) au repository pour la rendre symétrique.
+  similar   Product[] @relation("SimilarProducts")
+  similarOf Product[] @relation("SimilarProducts")
+
+  cartItems CartItem[]
+}
+
+model Cart {
+  id        String     @id @default(cuid())
+  items     CartItem[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+model CartItem {
+  id        String   @id @default(cuid())
+  cart      Cart     @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  cartId    String
+  product   Product  @relation(fields: [productId], references: [id])
+  productId String
+  quantity  Int      @default(1)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Un produit n'apparaît qu'une fois par panier (on incrémente la quantité).
+  @@unique([cartId, productId])
 }
