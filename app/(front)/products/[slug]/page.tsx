@@ -3,6 +3,7 @@ import Link from "next/link";
 import {Suspense} from "react";
 import {AddToCartButton} from "@/app/components/cart/AddToCartButton";
 import {ProductTabs} from "@/app/components/ProductTabs";
+import {SimilarProducts} from "@/app/components/SimilarProducts";
 import {
     formatPrice,
     formatStockLabel,
@@ -117,6 +118,14 @@ export default async function ProductPage(props: PageProps<"/products/[slug]">) 
                     </p>
                 </div>
             </div>
+
+            <Suspense
+                fallback={
+                    <div className="mt-16 h-64 animate-pulse rounded-2xl bg-zinc-100 dark:bg-zinc-800"/>
+                }
+            >
+                <SimilarProducts slug={slug}/>
+            </Suspense>
         </div>
     );
 }
