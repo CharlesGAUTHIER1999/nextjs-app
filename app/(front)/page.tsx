@@ -1,4 +1,5 @@
 import {ProductCard} from "../components/ProductCard";
+import {SponsoredProducts} from "../components/SponsoredProducts";
 import {getProducts} from "@/domains/catalog/repository/productRepository";
 
 export const dynamic = "force-dynamic";
@@ -21,6 +22,8 @@ export default async function Home() {
                     <ProductCard key={product.id} product={product}/>
                 ))}
             </section>
+
+            <SponsoredProducts limit={6} linkToInternal/>
         </div>
     );
 }

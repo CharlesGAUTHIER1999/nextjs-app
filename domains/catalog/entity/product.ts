@@ -59,13 +59,6 @@ export function formatSpecValue(value: unknown): string {
     return String(value);
 }
 
-export function getProductBySlug(
-    products: Product[],
-    slug: string
-): Product | undefined {
-    return products.find((p) => p.slug === slug);
-}
-
 export function getProductPath(product: Product): string {
     return `/products/${product.slug}`;
 }

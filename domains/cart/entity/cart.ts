@@ -45,7 +45,3 @@ export function totalQuantity(lines: CartLine[]): number {
 export function totalPrice(lines: CartLine[]): number {
     return lines.reduce((sum, l) => sum + l.lineTotal, 0);
 }
-
-export function formatCartTotal(cart: Cart): string {
-    return `${cart.totalPrice.toLocaleString("fr-FR")} ${cart.currency}`;
-}

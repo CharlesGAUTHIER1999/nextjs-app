@@ -1,21 +1,22 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Suspense } from "react";
-import { AddToCartButton } from "@/app/components/cart/AddToCartButton";
-import { ProductTabs } from "@/app/components/ProductTabs";
-import { SimilarProducts } from "@/app/components/SimilarProducts";
+import {Suspense} from "react";
+import {AddToCartButton} from "@/app/components/cart/AddToCartButton";
+import {ProductTabs} from "@/app/components/ProductTabs";
+import {SimilarProducts} from "@/app/components/SimilarProducts";
+import {SponsoredProducts} from "@/app/components/SponsoredProducts";
 import {
     formatPrice,
     formatStockLabel,
     isInStock,
 } from "@/domains/catalog/entity/product";
-import { getProductBySlug } from "@/domains/catalog/repository/productRepository";
+import {getProductBySlug} from "@/domains/catalog/repository/productRepository";
 
-// Skelette du bloc "produits similaires" (boundary imbriqué).
-function SimilarSkeleton() {
+// Skelette partagé par les sections "grille de cartes" (similaires + sponsorisés).
+function CardsSkeleton() {
     return (
         <section className="mt-16 border-t border-zinc-200 pt-12 dark:border-zinc-800">
-            <div className="h-8 w-48 animate-pulse rounded bg-zinc-100 dark:bg-zinc-800" />
+            <div className="h-8 w-48 animate-pulse rounded bg-zinc-100 dark:bg-zinc-800"/>
             <div className="mt-6 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
                 {[1, 2, 3].map((i) => (
                     <div
@@ -28,10 +29,7 @@ function SimilarSkeleton() {
     );
 }
 
-// Server Component asynchrone : c'est ICI que vit le `await` du produit.
-// Étant un enfant du <Suspense> de la page, son fallback peut donc s'afficher
-// le temps que la donnée arrive (vrai streaming du "reste du produit").
-export async function ProductDetail({ slug }: { slug: string }) {
+export async function ProductDetail({slug}: { slug: string }) {
     // Latence simulée pour visualiser le streaming (à retirer en vrai).
     await new Promise((r) => setTimeout(r, 1500));
 
@@ -94,10 +92,10 @@ export async function ProductDetail({ slug }: { slug: string }) {
 
                     <Suspense
                         fallback={
-                            <div className="mt-4 h-32 animate-pulse rounded bg-zinc-100 dark:bg-zinc-800" />
+                            <div className="mt-4 h-32 animate-pulse rounded bg-zinc-100 dark:bg-zinc-800"/>
                         }
                     >
-                        <ProductTabs slug={slug} product={product} />
+                        <ProductTabs slug={slug} product={product}/>
                     </Suspense>
 
                     <div className="mt-6 flex items-baseline gap-3">
@@ -116,7 +114,7 @@ export async function ProductDetail({ slug }: { slug: string }) {
                     </div>
 
                     <div className="mt-8">
-                        <AddToCartButton product={product} />
+                        <AddToCartButton product={product}/>
                     </div>
 
                     <p className="mt-6 text-xs text-zinc-500 dark:text-zinc-400">
@@ -125,9 +123,13 @@ export async function ProductDetail({ slug }: { slug: string }) {
                 </div>
             </div>
 
-            {/* Boundary imbriqué : les similaires streament une fois le produit rendu. */}
-            <Suspense fallback={<SimilarSkeleton />}>
-                <SimilarProducts slug={slug} />
+            {/* Boundaries imbriqués : similaires et sponsorisés */}
+            <Suspense fallback={<CardsSkeleton/>}>
+                <SimilarProducts slug={slug}/>
+            </Suspense>
+
+            <Suspense fallback={<CardsSkeleton/>}>
+                <SponsoredProducts limit={3} title="Vous aimerez aussi" linkToInternal/>
             </Suspense>
         </>
     );
