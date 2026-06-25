@@ -14,6 +14,7 @@ import {
 } from "@/domains/catalog/repository/productRepository";
 
 export const dynamic = "force-static";
+export const revalidate = 60;
 
 export async function generateStaticParams() {
     const products = await getProducts();
