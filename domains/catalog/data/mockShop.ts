@@ -95,7 +95,7 @@ export async function fetchMockShopProducts(
             query: PRODUCTS_QUERY,
             variables: {first: limit},
         }),
-        next: {revalidate: 3600},
+        next: { revalidate: 3600, tags: ["mockshop"] },
     });
     console.log(`[mockShop] fetch products ${(performance.now() - start).toFixed(0)}ms`,);
 
@@ -128,7 +128,7 @@ export async function fetchMockShopProductByHandle(
             query: PRODUCT_BY_HANDLE_QUERY,
             variables: {handle},
         }),
-        next: {revalidate: 3600}
+        next: { revalidate: 3600, tags: ["mockshop"] },
     });
     console.log(
         `[mockShop] fetch product by handle ${(performance.now() - start).toFixed(0)}ms`,

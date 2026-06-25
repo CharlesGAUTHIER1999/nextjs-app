@@ -1,5 +1,6 @@
 import {getSponsoredProducts} from "@/domains/catalog/repository/sponsoredProductRepository";
 import {SponsoredProductCard} from "@/app/components/SponsoredProductCard";
+import {RevalidateMockshopButton} from "@/app/components/RevalidateMockshopButton";
 
 type Props = {
     limit?: number;
@@ -19,9 +20,12 @@ export async function SponsoredProducts({
 
     return (
         <section className="mt-16 border-t border-zinc-200 pt-12 dark:border-zinc-800">
-            <h2 className="text-2xl font-bold text-zinc-900 dark:text-zinc-100">
-                {title}
-            </h2>
+            <div className="flex items-center">
+                <h2 className="text-2xl font-bold text-zinc-900 dark:text-zinc-100">
+                    {title}
+                </h2>
+                <RevalidateMockshopButton/>
+            </div>
             <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
                 Sélection de nos partenaires
             </p>
