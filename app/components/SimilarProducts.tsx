@@ -6,6 +6,7 @@ import { ProductCard } from "./ProductCard";
 export async function SimilarProducts({ slug }: { slug: string }) {
     const products = await getSimilarProducts(slug);
     if (products.length === 0) return null;
+    await new Promise((r) => setTimeout(r, 2000)); //Simulation de latence
 
     return (
         <section className="mt-16">
