@@ -1,20 +1,24 @@
+import { connection } from "next/server";
 import { getSimilarProducts } from "@/domains/catalog/repository/productRepository";
-import { ProductCard } from "./ProductCard";
+import { ProductCard } from "@/app/components/ProductCard";
 
-// Server Component asynchrone : sa propre requête, indépendante du produit.
-// (Servira de frontière de streaming à l'exercice 5.)
-export async function SimilarProducts({ slug }: { slug: string }) {
-    const products = await getSimilarProducts(slug);
-    if (products.length === 0) return null;
+type Props = { slug: string };
+
+export async function SimilarProducts({ slug }: Props) {
+    await connection();
+    const similars = await getSimilarProducts(slug);
+
     await new Promise((r) => setTimeout(r, 2000)); //Simulation de latence
 
+    if (similars.length === 0) return null;
+
     return (
-        <section className="mt-16">
-            <h2 className="mb-6 text-2xl font-bold text-zinc-900 dark:text-zinc-100">
+        <section className="mt-16 border-t border-zinc-200 pt-12 dark:border-zinc-800">
+            <h2 className="text-2xl font-bold text-zinc-900 dark:text-zinc-100">
                 Produits similaires
             </h2>
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                {products.map((product) => (
+            <div className="mt-6 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                {similars.map((product) => (
                     <ProductCard key={product.id} product={product} />
                 ))}
             </div>

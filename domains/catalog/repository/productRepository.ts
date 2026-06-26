@@ -25,7 +25,7 @@ function toEntity(row: PrismaProduct): Product {
     };
 }
 
-export async function getProducts(): Promise<Product[]> {
+export async function listProductsFromDb(): Promise<Product[]> {
     const rows = await prisma.product.findMany({
         orderBy: { createdAt: "asc" },
     });

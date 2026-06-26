@@ -1,7 +1,5 @@
+import { connection } from "next/server";
 import { CrashButton } from "./CrashButton";
-
-// Rendu à la demande : le fallback loading.tsx se déclenche à chaque visite.
-export const dynamic = "force-dynamic";
 
 async function getSlowData() {
     // Latence simulée : la page « suspend » pendant 2s → loading.tsx s'affiche.
@@ -10,6 +8,8 @@ async function getSlowData() {
 }
 
 export default async function DemoPage() {
+    // Rendu à la demande (cacheComponents) : le fallback loading.tsx s'affiche à chaque visite.
+    await connection();
     const message = await getSlowData();
 
     return (

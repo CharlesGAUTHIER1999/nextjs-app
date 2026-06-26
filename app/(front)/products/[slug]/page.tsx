@@ -1,27 +1,29 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Suspense } from "react";
-import { AddToCartButton } from "@/app/components/cart/AddToCartButton";
-import { ProductTabs } from "@/app/components/ProductTabs";
-import {
-    formatPrice,
-    formatStockLabel,
-    isInStock,
-} from "@/domains/catalog/entity/product";
-import { getProductBySlug } from "@/domains/catalog/repository/productRepository";
+import {Suspense} from "react";
+import {connection} from "next/server";
+import {AddToCartButton} from "@/app/components/AddToCartButton";
+import {ProductTabs} from "@/app/components/ProductTabs";
+import {formatPrice, formatStockLabel, isInStock,} from "@/domains/catalog/entity/product";
+import {getProductBySlug, listProductsFromDb,} from "@/domains/catalog/repository/productRepository";
+
+export async function generateStaticParams() {
+    const products = await listProductsFromDb();
+    return products.map((p) => ({slug: p.slug}));
+}
 
 export default async function ProductPage(props: PageProps<"/products/[slug]">) {
+    await connection();
     const { slug } = await props.params;
 
     const product = await getProductBySlug(slug);
+
     if (!product) {
         return <p>Produit introuvable.</p>;
     }
 
     const inStock = isInStock(product);
 
-    // Le conteneur vient du layout ; le loading.tsx couvre le chargement de la page.
-    // Les sections similaires/sponsorisées sont des slots parallèles (@similar / @sponsored).
     return (
         <>
             <nav className="mb-8 text-sm text-zinc-500 dark:text-zinc-400">
@@ -31,6 +33,7 @@ export default async function ProductPage(props: PageProps<"/products/[slug]">) 
                 <span className="mx-2">/</span>
                 <span className="text-zinc-900 dark:text-zinc-200">{product.name}</span>
             </nav>
+
 
             <div className="grid gap-10 lg:grid-cols-2">
                 <div className="space-y-4">
@@ -71,19 +74,20 @@ export default async function ProductPage(props: PageProps<"/products/[slug]">) 
                     <h1 className="mt-2 text-3xl font-bold text-zinc-900 dark:text-zinc-100 sm:text-4xl">
                         {product.name}
                     </h1>
-
+                    {/* Suspense required because ProductTabs uses useSearchParams() — distinct from PPR boundaries */}
                     <Suspense
                         fallback={
-                            <div className="mt-4 h-32 animate-pulse rounded bg-zinc-100 dark:bg-zinc-800" />
+                            <div className="mt-4 h-32 animate-pulse rounded bg-zinc-100 dark:bg-zinc-800"/>
                         }
                     >
-                        <ProductTabs slug={slug} product={product} />
+                        <ProductTabs slug={slug} product={product}/>
                     </Suspense>
 
+
                     <div className="mt-6 flex items-baseline gap-3">
-                        <span className="text-3xl font-bold text-zinc-900 dark:text-zinc-100">
-                            {formatPrice(product)}
-                        </span>
+                                            <span className="text-3xl font-bold text-zinc-900 dark:text-zinc-100">
+                                        {formatPrice(product)}
+                                </span>
                         <span
                             className={
                                 inStock
@@ -91,12 +95,11 @@ export default async function ProductPage(props: PageProps<"/products/[slug]">) 
                                     : "text-sm text-zinc-500 dark:text-zinc-400"
                             }
                         >
-                            {formatStockLabel(product)}
-                        </span>
+                                    {formatStockLabel(product)}
+                                  </span>
                     </div>
-
                     <div className="mt-8">
-                        <AddToCartButton product={product} />
+                        <AddToCartButton product={product}/>
                     </div>
 
                     <p className="mt-6 text-xs text-zinc-500 dark:text-zinc-400">

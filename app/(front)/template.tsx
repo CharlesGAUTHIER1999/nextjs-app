@@ -1,7 +1,12 @@
-import type { ReactNode } from "react";
+import React, {Suspense} from "react";
+import {PageTransition} from "./PageTransition";
 
-// Un template (≠ layout) est ré-instancié à chaque navigation : le composant est
-// remonté, donc l'animation CSS d'entrée se rejoue à chaque changement de page front.
-export default function FrontTemplate({ children }: { children: ReactNode }) {
-    return <div className="animate-fade-in">{children}</div>;
+export default function FrontTemplate({
+                                          children,
+                                      }: Readonly<{ children: React.ReactNode }>) {
+    return (
+        <Suspense fallback={null}>
+            <PageTransition>{children}</PageTransition>
+        </Suspense>
+    );
 }
