@@ -54,3 +54,15 @@ model CartItem {
   // Un produit n'apparaît qu'une fois par panier (on incrémente la quantité).
   @@unique([cartId, productId])
 }
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String // hash (jamais le mot de passe en clair)
+  name      String? // sert à dériver le trigramme affiché dans le header
+  // SQLite ne supporte pas les enums Prisma : role est un String.
+  // Valeurs attendues : "user" | "admin" (affectation admin via Prisma Studio).
+  role      String   @default("user")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
