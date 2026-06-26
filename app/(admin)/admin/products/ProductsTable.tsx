@@ -46,14 +46,22 @@ export async function ProductsTable() {
                 </span>
                         </td>
                         <td className="px-4 py-3">
-                            <Link
-                                href={`/produit/${product.slug}`}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-zinc-500 hover:text-zinc-300"
-                            >
-                                Voir →
-                            </Link>
+                            <div className="flex items-center gap-4">
+                                <Link
+                                    href={`/admin/products/${product.id}`}
+                                    className="text-zinc-400 hover:text-white"
+                                >
+                                    Modifier
+                                </Link>
+                                <Link
+                                    href={`/products/${product.slug}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-zinc-500 hover:text-zinc-300"
+                                >
+                                    Voir →
+                                </Link>
+                            </div>
                         </td>
                     </tr>
                 ))}
