@@ -1,21 +1,22 @@
 import Image from "next/image";
 import Link from "next/link";
 import type {Product} from "@/domains/catalog/entity/product";
-import {
-    formatPrice,
-    getProductPath,
-    isInStock,
-    isLowStock,
-} from "@/domains/catalog/entity/product";
+import {formatPrice, getProductPath, isInStock, isLowStock,} from "@/domains/catalog/entity/product";
 
-export function ProductCard({product}: { product: Product }) {
+export function ProductCard({
+                                product,
+                                shouldPrefetch = true,
+                            }: {
+    product: Product;
+    shouldPrefetch?: boolean;
+}) {
     const inStock = isInStock(product);
     const lowStock = isLowStock(product);
 
     return (
         <article
             className="group relative flex flex-col overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-sm transition hover:border-zinc-300 hover:shadow-md dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-zinc-700">
-            <Link href={getProductPath(product)} className="flex flex-col flex-1">
+            <Link href={getProductPath(product)} prefetch={shouldPrefetch} className="flex flex-col flex-1">
                 <div className="relative aspect-square overflow-hidden bg-zinc-100 dark:bg-zinc-800">
                     <Image
                         src={product.images.main}
