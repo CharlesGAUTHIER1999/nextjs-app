@@ -1,14 +1,24 @@
 import Link from "next/link";
-import {auth} from "@/auth";
-import {NavUserMenu} from "./NavUserMenu";
+import { auth } from "@/auth";
+import { NavUserMenu } from "./NavUserMenu";
 
 export async function NavAuth() {
     const session = await auth();
 
     if (session?.user?.email) {
         return (
-            <NavUserMenu name={session.user.name} email={session.user.email}/>
-        );
+        <div className="flex items-center gap-4">
+            {session.user.role === "admin" && (
+                <Link
+                    href="/admin"
+                    className="text-sm text-zinc-500 hover:text-zinc-900 hover:underline dark:text-zinc-500 dark:hover:text-zinc-100"
+                >
+                    Admin
+                </Link>
+            )}
+            <NavUserMenu name={session.user.name} email={session.user.email} />
+        </div>
+    );
     }
 
     return (

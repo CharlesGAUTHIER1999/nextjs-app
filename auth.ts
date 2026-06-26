@@ -2,11 +2,10 @@ import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { compare } from "bcryptjs";
 import { prisma } from "@/lib/prisma";
+import { authConfig } from "./auth.config";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
-    // Requis en self-hosted (next start hors Vercel) : sans ça, Auth.js renvoie
-    // UntrustedHost en production. En dev, l'hôte est toléré automatiquement.
-    trustHost: true,
+    ...authConfig,
     providers: [
         Credentials({
             credentials: {
@@ -27,13 +26,8 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
                     user.password,
                 );
                 if (!valid) return null;
-
-                return { id: user.id, email: user.email, name: user.name };
+                return { id: user.id, email: user.email, name: user.name, role: user.role };
             },
         }),
     ],
-    pages: {
-        signIn: "/login",
-    },
-    session: { strategy: "jwt" },
 });
