@@ -1,3 +1,4 @@
+import {unstable_cache} from "next/cache";
 import {prisma} from "@/lib/prisma";
 import type {Product, ProductImages, ProductSpecs} from "@/domains/catalog/entity/product";
 import type {ProductUpdateInput} from "@/domains/catalog/entity/productSchema";
@@ -18,12 +19,16 @@ function mapSpecs(specs: unknown): ProductSpecs {
     return specs as ProductSpecs;
 }
 
-export async function findAllProducts(): Promise<Product[]> {
-    const rows = await prisma.product.findMany({
-        orderBy: {createdAt: "desc"},
-    });
-    return rows.map((row) => mapRowToProduct(row));
-}
+export const findAllProducts = unstable_cache(
+    async (): Promise<Product[]> => {
+        const rows = await prisma.product.findMany({
+            orderBy: { createdAt: "desc" },
+        });
+        return rows.map((row) => mapRowToProduct(row));
+    },
+    ["catalog"],
+    { tags: ["catalog"] },
+);
 
 export function mapRowToProduct(row: {
     id: string;

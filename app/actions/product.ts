@@ -1,7 +1,7 @@
 "use server";
 
 import {z} from "zod";
-import {revalidatePath} from "next/cache";
+import {revalidatePath, revalidateTag} from "next/cache";
 import {productUpdateSchema} from "@/domains/catalog/entity/productSchema";
 import {updateProduct} from "@/domains/catalog/repository/productRepository";
 
@@ -25,6 +25,7 @@ export async function updateProductAction(
     await updateProduct(id, parsed.data);
 
     revalidatePath("/admin/products");
+    revalidateTag("catalog", "max");
 
     return {success: true};
 }
