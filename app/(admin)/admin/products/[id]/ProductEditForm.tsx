@@ -1,9 +1,8 @@
 "use client";
 
-import { useActionState } from "react";
-import { useCallback } from "react";
-import { updateProductAction, type UpdateProductState } from "@/app/actions/product";
-import type { Product } from "@/domains/catalog/entity/product";
+import {useActionState, useCallback} from "react";
+import {updateProductAction, type UpdateProductState} from "@/app/actions/product";
+import type {Product} from "@/domains/catalog/entity/product";
 
 function Field({
                    label,
