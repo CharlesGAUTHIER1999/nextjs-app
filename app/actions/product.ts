@@ -7,6 +7,7 @@ import {updateProduct} from "@/domains/catalog/repository/productRepository";
 
 export type UpdateProductState = {
     errors?: Partial<Record<string, string[]>>;
+    message?: string;
     success?: boolean;
 };
 
@@ -15,6 +16,14 @@ export async function updateProductAction(
     _prevState: UpdateProductState,
     formData: FormData,
 ): Promise<UpdateProductState> {
+    const shouldSimulateError = formData.get("simulateError") === "1";
+    if (shouldSimulateError) {
+        return {
+            success: false,
+            message: "Erreur simulee: impossible de mettre a jour le produit.",
+        };
+    }
+
     const raw = Object.fromEntries(formData);
     const parsed = productUpdateSchema.safeParse(raw);
 
@@ -22,7 +31,15 @@ export async function updateProductAction(
         return {errors: z.flattenError(parsed.error).fieldErrors};
     }
 
-    await updateProduct(id, parsed.data);
+    try {
+        await updateProduct(id, parsed.data);
+    } catch {
+        return {
+            success: false,
+            message: "Une erreur serveur est survenue. Reessayez.",
+        };
+    }
+
 
     revalidatePath("/admin/products");
     revalidateTag("catalog", "max");

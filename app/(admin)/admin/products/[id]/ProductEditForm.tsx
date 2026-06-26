@@ -66,6 +66,12 @@ export function ProductEditForm({ product }: { product: Product }) {
 
     return (
         <form action={action} className="space-y-5">
+            {state.message && (
+                <p aria-live="polite" className="rounded-lg bg-red-900/30 px-4 py-3 text-sm text-red-300">
+                    {state.message}
+                </p>
+            )}
+
             {state.success && (
                 <p className="rounded-lg bg-emerald-900/30 px-4 py-3 text-sm text-emerald-400">
                     Produit mis à jour avec succès.
@@ -97,13 +103,24 @@ export function ProductEditForm({ product }: { product: Product }) {
                 errors={state.errors?.imageUrl}
             />
 
-            <button
-                type="submit"
-                disabled={pending}
-                className="rounded-lg bg-zinc-100 px-4 py-2 text-sm font-medium text-zinc-900 hover:bg-white disabled:opacity-60"
-            >
-                {pending ? "Enregistrement…" : "Enregistrer"}
-            </button>
+            <div className="flex flex-wrap gap-3">
+                <button
+                    type="submit"
+                    disabled={pending}
+                    className="rounded-lg bg-zinc-100 px-4 py-2 text-sm font-medium text-zinc-900 hover:bg-white disabled:opacity-60"
+                >
+                    {pending ? "Enregistrement..." : "Enregistrer"}
+                </button>
+                <button
+                    type="submit"
+                    name="simulateError"
+                    value="1"
+                    disabled={pending}
+                    className="rounded-lg border border-red-500/50 px-4 py-2 text-sm font-medium text-red-300 hover:bg-red-950/40 disabled:opacity-60"
+                >
+                    Simuler une erreur serveur
+                </button>
+            </div>
         </form>
     );
 }
