@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import {useSearchParams} from "next/navigation";
-import type {Product} from "@/domains/catalog/entity/product";
+import { useSearchParams } from "next/navigation";
+import type { Product } from "@/domains/catalog/entity/product";
 import {
     formatSpecLabel,
     formatSpecValue,
@@ -32,7 +32,7 @@ export function ProductTabs({
         <>
             <div className="mt-4 flex gap-2 border-b border-zinc-200 dark:border-zinc-700">
                 <Link
-                    href={`/products/${slug}?tab=${TAB_DESCRIPTION}`}
+                    href={`/produit/${slug}?tab=${TAB_DESCRIPTION}`}
                     className={`border-b-2 px-2 pb-2 text-sm font-medium transition-colors ${
                         tab === TAB_DESCRIPTION
                             ? "border-zinc-900 text-zinc-900 dark:border-zinc-100 dark:text-zinc-100"
@@ -42,7 +42,7 @@ export function ProductTabs({
                     Description
                 </Link>
                 <Link
-                    href={`/products/${slug}?tab=${TAB_SPECS}`}
+                    href={`/produit/${slug}?tab=${TAB_SPECS}`}
                     className={`border-b-2 px-2 pb-2 text-sm font-medium transition-colors ${
                         tab === TAB_SPECS
                             ? "border-zinc-900 text-zinc-900 dark:border-zinc-100 dark:text-zinc-100"

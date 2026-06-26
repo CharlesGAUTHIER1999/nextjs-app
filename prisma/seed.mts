@@ -4,7 +4,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { PrismaClient } from "@prisma/client";
 import { PrismaBetterSqlite3 } from "@prisma/adapter-better-sqlite3";
-import type { Product } from "../domains/catalog/entity/product.ts";
+import type { Product } from "@/domains/catalog/entity/product";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 

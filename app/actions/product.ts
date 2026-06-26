@@ -40,8 +40,7 @@ export async function updateProductAction(
         };
     }
 
-
-    revalidatePath("/admin/products");
+    revalidatePath("/admin/produits");
     revalidateTag("catalog", "max");
 
     return {success: true};

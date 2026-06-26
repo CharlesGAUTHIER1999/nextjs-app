@@ -23,7 +23,11 @@ function resolvePrefetchVariant(forced?: string, fromCookie?: string): PrefetchV
 }
 
 function isFrontPath(pathname: string): boolean {
-    return pathname === "/" || pathname.startsWith("/produit");
+    return (
+        pathname === "/" ||
+        pathname.startsWith("/products") ||
+        pathname.startsWith("/product-partenaire")
+    );
 }
 
 export default auth((req) => {

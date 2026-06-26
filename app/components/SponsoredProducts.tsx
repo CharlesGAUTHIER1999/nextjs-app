@@ -1,3 +1,4 @@
+import {cookies} from "next/headers";
 import {getSponsoredProducts} from "@/domains/catalog/repository/sponsoredProductRepository";
 import {SponsoredProductCard} from "@/app/components/SponsoredProductCard";
 import {RevalidateMockshopButton} from "@/app/components/RevalidateMockshopButton";
@@ -18,6 +19,10 @@ export async function SponsoredProducts({
 
     if (products.length === 0) return null;
 
+    // Variante AB (posée par le proxy) : B → prefetch au hover, sinon auto.
+    const variant = (await cookies()).get("ab_prefetch_variant")?.value;
+    const prefetchMode = variant === "B" ? "hover" : "auto";
+
     return (
         <section className="mt-16 border-t border-zinc-200 pt-12 dark:border-zinc-800">
             <div className="flex items-center">
@@ -35,6 +40,7 @@ export async function SponsoredProducts({
                         key={product.id}
                         product={product}
                         linkToInternal={linkToInternal}
+                        prefetchMode={prefetchMode}
                     />
                 ))}
             </div>

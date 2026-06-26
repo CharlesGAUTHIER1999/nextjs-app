@@ -1,22 +1,40 @@
-import { cookies } from "next/headers";
-import { CART_COOKIE } from "@/domains/cart/entity/cart";
-import { getCart } from "@/domains/cart/repository/cartRepository";
+"use client";
 
-// Server Component : lit l'id de panier dans le cookie puis le panier en base.
-// Lire un cookie bascule la route en rendu dynamique (request-time API).
-export async function CartSummary() {
-    const cartId = (await cookies()).get(CART_COOKIE)?.value;
-    const cart = await getCart(cartId);
+import { useEffect, useState } from "react";
+import type { CartItem } from "@/domains/catalog/entity/cart";
+import {
+    getCartCurrency,
+    getTotalArticles,
+    getTotalPrice,
+} from "@/domains/catalog/entity/cart";
+import { CART_UPDATED_EVENT } from "@/app/lib/cartEvents";
+
+export function CartSummary() {
+    const [items, setItems] = useState<CartItem[]>([]);
+
+    const fetchCart = () => {
+        fetch("/api/cart")
+            .then((res) => res.json())
+            .then((data) => setItems(data.items ?? []))
+            .catch(() => setItems([]));
+    };
+
+    useEffect(() => {
+        fetchCart();
+        const onCartUpdated = () => fetchCart();
+        window.addEventListener(CART_UPDATED_EVENT, onCartUpdated);
+        return () => window.removeEventListener(CART_UPDATED_EVENT, onCartUpdated);
+    }, []);
+
+    const currency = getCartCurrency(items) ?? "EUR";
+    const totalArticles = getTotalArticles(items);
+    const totalPrice = getTotalPrice(items);
+
+    if (totalArticles === 0) return null;
 
     return (
-        <div className="flex items-center gap-2 rounded-full border border-zinc-200 px-3 py-1.5 text-sm dark:border-zinc-700">
-            <span aria-hidden>🛒</span>
-            <span className="font-medium text-zinc-900 dark:text-zinc-100">
-                {cart.totalQuantity}
-            </span>
-            <span className="text-zinc-500 dark:text-zinc-400">
-                · {cart.totalPrice.toLocaleString("fr-FR")} €
-            </span>
-        </div>
+        <span className="rounded-full bg-zinc-200 px-3 py-1.5 text-sm font-medium text-zinc-700 dark:bg-zinc-700 dark:text-zinc-200">
+      {totalArticles} article{totalArticles > 1 ? "s" : ""} · {totalPrice.toFixed(2)} {currency}
+    </span>
     );
 }

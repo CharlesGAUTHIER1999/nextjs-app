@@ -1,15 +1,20 @@
 import Image from "next/image";
-import Link from "next/link";
 import type {SponsoredProduct} from "@/domains/catalog/entity/sponsoredProduct";
 import {formatSponsoredPrice} from "@/domains/catalog/entity/sponsoredProduct";
+import {PrefetchLink, type PrefetchMode} from "@/app/components/PrefetchLink";
 
 type Props = {
     product: SponsoredProduct;
     /** true = lien vers notre fiche /product-partenaire/[handle], false = lien externe partenaire */
     linkToInternal?: boolean;
+    prefetchMode?: PrefetchMode;
 };
 
-export function SponsoredProductCard({product, linkToInternal = false}: Props) {
+export function SponsoredProductCard({
+                                         product,
+                                         linkToInternal = false,
+                                         prefetchMode = "auto",
+                                     }: Props) {
     const href = linkToInternal
         ? `/product-partenaire/${product.handle}`
         : product.url;
@@ -98,9 +103,9 @@ export function SponsoredProductCard({product, linkToInternal = false}: Props) {
                     {linkContent}
                 </a>
             ) : (
-                <Link href={href} className="flex flex-1 flex-col">
+                <PrefetchLink href={href} mode={prefetchMode} className="flex flex-1 flex-col">
                     {linkContent}
-                </Link>
+                </PrefetchLink>
             )}
         </article>
     );

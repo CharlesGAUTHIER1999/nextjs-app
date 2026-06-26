@@ -7,18 +7,18 @@ export async function NavAuth() {
 
     if (session?.user?.email) {
         return (
-        <div className="flex items-center gap-4">
-            {session.user.role === "admin" && (
-                <Link
-                    href="/admin"
-                    className="text-sm text-zinc-500 hover:text-zinc-900 hover:underline dark:text-zinc-500 dark:hover:text-zinc-100"
-                >
-                    Admin
-                </Link>
-            )}
-            <NavUserMenu name={session.user.name} email={session.user.email} />
-        </div>
-    );
+            <div className="flex items-center gap-4">
+                {session.user.role === "admin" && (
+                    <Link
+                        href="/admin"
+                        className="text-sm text-zinc-500 hover:text-zinc-900 hover:underline dark:text-zinc-500 dark:hover:text-zinc-100"
+                    >
+                        Admin
+                    </Link>
+                )}
+                <NavUserMenu name={session.user.name} email={session.user.email} />
+            </div>
+        );
     }
 
     return (

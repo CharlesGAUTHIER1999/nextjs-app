@@ -8,7 +8,7 @@ type Props = { slug: string };
 export async function SimilarProducts({ slug }: Props) {
     await connection();
     const variant = (await cookies()).get("ab_prefetch_variant")?.value;
-    const shouldPrefetch = variant !== "B";
+    const prefetchMode = variant === "B" ? "hover" : "auto";
     const similars = await getSimilarProducts(slug);
 
     await new Promise((r) => setTimeout(r, 2000)); //Simulation de latence
@@ -22,7 +22,7 @@ export async function SimilarProducts({ slug }: Props) {
             </h2>
             <div className="mt-6 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
                 {similars.map((product) => (
-                    <ProductCard key={product.id} product={product} shouldPrefetch={shouldPrefetch} />
+                    <ProductCard key={product.id} product={product} prefetchMode={prefetchMode} />
                 ))}
             </div>
         </section>

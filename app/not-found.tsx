@@ -1,26 +1,35 @@
 import Link from "next/link";
+import { Suspense } from "react";
+import { Footer } from "./components/Footer";
+import { Nav } from "./components/Nav";
 
-// 404 globale : rendue par Next pour toute route non matchée, ainsi que lors d'un
-// appel à notFound(). Elle vit dans le root layout (pas (front)) → pas de Nav/Footer,
-// d'où un lien de retour explicite.
-export default function NotFound() {
+export default async function NotFound() {
     return (
-        <div className="flex min-h-screen flex-col items-center justify-center px-4 text-center">
-            <p className="font-display text-8xl font-bold text-zinc-900 dark:text-zinc-100">
-                404
-            </p>
-            <h1 className="mt-4 text-2xl font-semibold text-zinc-800 dark:text-zinc-200">
-                Page introuvable
-            </h1>
-            <p className="mt-3 max-w-md text-zinc-500 dark:text-zinc-400">
-                Désolé, la page que vous cherchez n’existe pas ou a été déplacée.
-            </p>
-            <Link
-                href="/"
-                className="mt-8 rounded-xl bg-zinc-900 px-6 py-3 font-semibold text-white transition hover:bg-zinc-800 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200"
-            >
-                Retour à l’accueil
-            </Link>
+        <div className="flex min-h-screen flex-col">
+            <Suspense>
+                <Nav />
+            </Suspense>
+            <main className="flex-1">
+                <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+                    <div className="text-center">
+                        <h1 className="text-4xl font-bold text-zinc-900 dark:text-zinc-100">
+                            404
+                        </h1>
+                        <p className="mt-2 text-lg text-zinc-600 dark:text-zinc-400">
+                            Cette page n&apos;existe pas.
+                        </p>
+                        <Link
+                            href="/"
+                            className="mt-6 inline-block rounded bg-zinc-900 px-4 py-2 text-sm font-medium text-white hover:bg-zinc-800 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200"
+                        >
+                            Retour à l&apos;accueil
+                        </Link>
+                    </div>
+                </div>
+            </main>
+            <Suspense>
+                <Footer />
+            </Suspense>
         </div>
     );
 }
