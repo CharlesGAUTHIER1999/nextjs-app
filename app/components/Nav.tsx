@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { Suspense } from "react";
-import { CartSummary } from "@/app/components/CartSummary";
+import {Suspense} from "react";
+import {CartSummary} from "@/app/components/CartSummary";
+import { NavAuth } from "@/app/components/NavAuth";
 
 export function Nav() {
     return (
@@ -34,14 +35,10 @@ export function Nav() {
                                 Admin
                             </Link>
                         </li>
-                        <li>
-                            <Link href="/register" className="hover:underline">
-                                Inscription
-                            </Link>
-                        </li>
                     </ul>
-                    {/* cookies() est dynamique : on l'isole dans <Suspense> pour ne pas
-                        bloquer le prérendu PPR des routes (cf. exercice 2-9). */}
+                    <Suspense fallback={<div className="h-8 w-20" />}>
+                        <NavAuth />
+                    </Suspense>
                     <Suspense
                         fallback={
                             <div className="h-8 w-20 animate-pulse rounded-full bg-zinc-100 dark:bg-zinc-800" />
