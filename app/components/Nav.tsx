@@ -1,7 +1,8 @@
 import Link from "next/link";
-import type { ReactNode } from "react";
+import { Suspense } from "react";
+import { CartSummary } from "@/app/components/CartSummary";
 
-export function Nav({ cartSummary }: { cartSummary?: ReactNode }) {
+export function Nav() {
     return (
         <header className="border-b border-zinc-200 dark:border-zinc-800">
             <nav className="mx-auto flex max-w-5xl items-center justify-between px-4 py-4">
@@ -33,8 +34,21 @@ export function Nav({ cartSummary }: { cartSummary?: ReactNode }) {
                                 Admin
                             </Link>
                         </li>
+                        <li>
+                            <Link href="/register" className="hover:underline">
+                                Inscription
+                            </Link>
+                        </li>
                     </ul>
-                    {cartSummary}
+                    {/* cookies() est dynamique : on l'isole dans <Suspense> pour ne pas
+                        bloquer le prérendu PPR des routes (cf. exercice 2-9). */}
+                    <Suspense
+                        fallback={
+                            <div className="h-8 w-20 animate-pulse rounded-full bg-zinc-100 dark:bg-zinc-800" />
+                        }
+                    >
+                        <CartSummary />
+                    </Suspense>
                 </div>
             </nav>
         </header>
