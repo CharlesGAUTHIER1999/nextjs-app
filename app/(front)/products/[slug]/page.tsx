@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import {Suspense} from "react";
@@ -10,6 +11,28 @@ import {getProductBySlug, listProductsFromDb,} from "@/domains/catalog/repositor
 export async function generateStaticParams() {
     const products = await listProductsFromDb();
     return products.map((p) => ({slug: p.slug}));
+}
+
+export async function generateMetadata(
+    props: PageProps<"/products/[slug]">,
+): Promise<Metadata> {
+    await connection();
+    const { slug } = await props.params;
+    const product = await getProductBySlug(slug);
+
+    if (!product) {
+        return { title: "Produit introuvable" };
+    }
+
+    return {
+        title: product.name,
+        description: product.description,
+        openGraph: {
+            title: product.name,
+            description: product.description,
+            images: [{ url: product.images.main, alt: product.name }],
+        },
+    };
 }
 
 export default async function ProductPage(props: PageProps<"/products/[slug]">) {

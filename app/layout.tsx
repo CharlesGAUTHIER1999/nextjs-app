@@ -25,8 +25,25 @@ const dancingScript = localFont({
 });
 
 export const metadata: Metadata = {
-    title: "Gauthier App",
-    description: "Gauthier App",
+    title: {
+        default: "Gauthier App",
+        template: "%s | Gauthier App",
+    },
+    description:
+        "Découvrez notre sélection de véhicules automobiles performants et de luxe",
+    keywords: ["ecommerce", "véhicules", "automobile", "performant", "luxe"],
+    openGraph: {
+        type: "website",
+        locale: "fr_FR",
+        siteName: "News App",
+        title: "News App",
+        description:
+            "Découvrez notre sélection de véhicules automobiles performants et de luxe.",
+    },
+    robots: {
+        index: true,
+        follow: true,
+    },
 };
 
 export default function RootLayout({
