@@ -8,7 +8,7 @@ export function Nav() {
         <header className="border-b border-zinc-200 dark:border-zinc-800">
             <nav className="mx-auto flex max-w-5xl items-center justify-between px-4 py-4">
                 <Link href="/" className="font-display text-2xl font-bold">
-                    Gauthier App
+                    {process.env.NEXT_PUBLIC_SITE_NAME}
                 </Link>
                 <div className="flex items-center gap-6">
                     <ul className="flex gap-6">
