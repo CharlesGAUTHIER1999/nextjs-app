@@ -3,6 +3,7 @@ import {Geist, Geist_Mono} from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 import React from "react";
+import { WebVitals } from "./components/WebVitals";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -38,6 +39,7 @@ export default function RootLayout({
         <body
             className={`${geistSans.variable} ${geistMono.variable} ${dancingScript.variable} min-h-screen antialiased`}
         >
+        <WebVitals />
         {children}
         </body>
         </html>
